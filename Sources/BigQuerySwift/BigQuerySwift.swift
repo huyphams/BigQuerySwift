@@ -252,7 +252,9 @@ public struct BigQueryClient<T : Encodable> {
           QueryHTTPResponse.self,
           from: body
         )
-        NSLog("Response: \(body)")
+        let JSON = try JSONSerialization.jsonObject(with: body, options: .allowFragments)
+        NSLog("\(JSON)")
+
         let parsed: QueryResponse<V>
         if let simpleDict = response.toDictionary() {
           parsed = try QueryResponse(
