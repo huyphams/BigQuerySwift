@@ -260,6 +260,7 @@ public struct BigQueryClient<T : Encodable> {
           QueryHTTPResponse.self,
           from: body
         )
+        NSLog("Response: \(response.toDictionary())")
         let parsed: QueryResponse<V>
         if let simpleDict = response.toDictionary() {
           parsed = try QueryResponse(
