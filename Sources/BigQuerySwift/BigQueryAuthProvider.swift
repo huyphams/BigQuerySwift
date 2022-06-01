@@ -11,6 +11,10 @@ public enum AuthResponse {
   case error(Error)
 }
 
+enum AuthError: Error {
+  case couldNotParseFile
+}
+
 /// Handles authenticating a service account
 public struct BigQueryAuthProvider {
   /// Set scope to be BigQuery
@@ -34,9 +38,9 @@ public struct BigQueryAuthProvider {
   public func getAuthenticationToken(completionHandler: @escaping (AuthResponse) -> Void) throws {
     guard let tokenProvider = ServiceAccountTokenProvider(
       credentialsURL: tokenURL,
-      scopes:scopes
+      scopes: scopes
     ) else {
-      fatalError("Failed to create token provider")
+      throw AuthError.couldNotParseFile
     }
     // Request token
     try tokenProvider.withToken { (token, error) in
