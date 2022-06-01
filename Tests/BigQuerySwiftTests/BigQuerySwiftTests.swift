@@ -5,7 +5,6 @@ import XCTest
 extension QueryResponse: Equatable where T: Equatable {
     public static func == (lhs: QueryResponse<T>, rhs: QueryResponse<T>) -> Bool {
         return lhs.rows == rhs.rows && lhs.pageToken == rhs.pageToken &&
-            lhs.totalBytesProcessed == rhs.totalBytesProcessed &&
             lhs.errors == rhs.errors
     }
 }
@@ -217,8 +216,7 @@ final class BigQuerySwiftTests: XCTestCase {
             ]
           }
          ],
-         "totalBytesProcessed": "120",
-          "errors": [
+         "errors": [
             {
               "reason": "bla",
               "location": "line 1",
@@ -244,8 +242,7 @@ final class BigQuerySwiftTests: XCTestCase {
         let expected = QueryResponse(
             rows: rows,
             errors: errors,
-            pageToken: nil,
-            totalBytesProcessed: "120"
+            pageToken: nil
         )
         let client = BigQueryClient<TestRow>(
             authenticationToken: authenticationToken,

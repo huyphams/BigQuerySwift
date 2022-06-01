@@ -114,7 +114,6 @@ public struct QueryHTTPResponse: Decodable {
   let schema: BigQuerySchema?
   let rows: [BigQueryRow]?
   let pageToken: String?
-  let totalBytesProcessed: String
   let errors: [BigQueryError]?
 
   /// Convert query response from schema and rows into a single dictionary
@@ -147,19 +146,15 @@ public struct QueryHTTPResponse: Decodable {
 public struct QueryResponse<T: Decodable>: Decodable {
   public let rows: [T]?
   public let pageToken: String?
-  public let totalBytesProcessed: String
   public let errors: [BigQueryError]?
 
-  init(rows: [T]?, errors: [BigQueryError]?, pageToken: String?,
-       totalBytesProcessed: String) {
+  init(rows: [T]?, errors: [BigQueryError]?, pageToken: String?) {
     self.rows = rows
     self.pageToken = pageToken
-    self.totalBytesProcessed = totalBytesProcessed
     self.errors = errors
   }
 
-  init(dict: [[String:Any]], errors: [BigQueryError]?, pageToken: String?,
-       totalBytesProcessed: String) throws {
+  init(dict: [[String:Any]], errors: [BigQueryError]?, pageToken: String?) throws {
     let jsonData = try JSONSerialization.data(withJSONObject: dict)
     let decoder = JSONDecoder()
     self.rows = try decoder.decode(
@@ -167,15 +162,12 @@ public struct QueryResponse<T: Decodable>: Decodable {
       from: jsonData
     )
     self.pageToken = pageToken
-    self.totalBytesProcessed = totalBytesProcessed
     self.errors = errors
   }
 
-  init(errors: [BigQueryError]?, pageToken: String?,
-       totalBytesProcessed: String) throws {
+  init(errors: [BigQueryError]?, pageToken: String?) throws {
     self.errors = errors
     self.pageToken = pageToken
-    self.totalBytesProcessed = totalBytesProcessed
     self.rows = nil
   }
 }
@@ -260,20 +252,17 @@ public struct BigQueryClient<T : Encodable> {
           QueryHTTPResponse.self,
           from: body
         )
-        NSLog("Response: \(response.toDictionary())")
         let parsed: QueryResponse<V>
         if let simpleDict = response.toDictionary() {
           parsed = try QueryResponse(
             dict: simpleDict,
             errors: response.errors,
-            pageToken: response.pageToken,
-            totalBytesProcessed: response.totalBytesProcessed
+            pageToken: response.pageToken
           )
         } else {
           parsed = try QueryResponse(
             errors: response.errors,
-            pageToken: response.pageToken,
-            totalBytesProcessed: response.totalBytesProcessed
+            pageToken: response.pageToken
           )
         }
         completionHandler(.queryResponse(parsed))
