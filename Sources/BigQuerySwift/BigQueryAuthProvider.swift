@@ -23,10 +23,10 @@ public struct BigQueryAuthProvider {
     "https://www.googleapis.com/auth/bigquery.insertdata",
   ]
 
-  private let tokenURL: URL
+  private let credentialsURL: URL
 
-  public init(tokenURL: URL) {
-    self.tokenURL = tokenURL
+  public init(credentialsURL: URL) {
+    self.credentialsURL = credentialsURL
   }
 
   /// Get an authentication token to be used in API calls.
@@ -37,7 +37,7 @@ public struct BigQueryAuthProvider {
   /// - Throws: If JWT creation fails
   public func getAuthenticationToken(completionHandler: @escaping (AuthResponse) -> Void) throws {
     guard let tokenProvider = ServiceAccountTokenProvider(
-      credentialsURL: tokenURL,
+      credentialsURL: credentialsURL,
       scopes: scopes
     ) else {
       throw AuthError.couldNotParseFile
