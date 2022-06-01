@@ -3,7 +3,7 @@
     "pins": [
       {
         "package": "Auth",
-        "repositoryURL": "https://github.com/saga-dash/auth-library-swift.git",
+        "repositoryURL": "https://github.com/huyphams/auth-library-swift.git",
         "state": {
           "branch": "master",
           "revision": "26afd1ad24463fa22168ae9e6c25df3bd9b42884",
@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/IBM-Swift/CircuitBreaker.git",
         "state": {
           "branch": null,
-          "revision": "81581e3fb094ab4879aa2c5ce54201f1dbce0a7f",
-          "version": "5.0.1"
+          "revision": "915cd4ed17500784cf5bcbf2ef54a76830884c86",
+          "version": "5.0.200"
         }
       },
       {
@@ -33,8 +33,8 @@
         "repositoryURL": "https://github.com/krzyzanowskim/CryptoSwift.git",
         "state": {
           "branch": null,
-          "revision": "874280173e082cdd7ac6602be235914efe3f4dbc",
-          "version": "0.13.0"
+          "revision": "5da70ba744d58d772201f03600eb16c53197652d",
+          "version": "0.15.0"
         }
       },
       {
@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/IBM-Swift/LoggerAPI.git",
         "state": {
           "branch": null,
-          "revision": "5041f2673aa75d6e973d9b6bd3956bc5068387c8",
-          "version": "1.7.3"
+          "revision": "e82d34eab3f0b05391082b11ea07d3b70d2f65bb",
+          "version": "1.9.200"
         }
       },
       {
@@ -53,6 +53,15 @@
           "branch": null,
           "revision": "e325083424688055363bbfcb7f1a440d7d7a1bae",
           "version": "1.2.2"
+        }
+      },
+      {
+        "package": "swift-log",
+        "repositoryURL": "https://github.com/apple/swift-log.git",
+        "state": {
+          "branch": null,
+          "revision": "5d66f7ba25daf4f94100e7022febf3c75e37a6c7",
+          "version": "1.4.2"
         }
       },
       {
@@ -69,8 +78,8 @@
         "repositoryURL": "https://github.com/IBM-Swift/SwiftyRequest.git",
         "state": {
           "branch": null,
-          "revision": "617de05a8bea00acf0c1fd68fd8c42aa7a42c036",
-          "version": "1.1.3"
+          "revision": "7714415e171964870f303644ab12e8539ea2f4fd",
+          "version": "2.2.1"
         }
       }
     ]

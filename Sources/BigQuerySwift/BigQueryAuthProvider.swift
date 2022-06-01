@@ -27,15 +27,9 @@ public struct BigQueryAuthProvider {
     ///
     /// - Parameter completionHandler: Called upon completion
     /// - Throws: If JWT creation fails
-    public func getAuthenticationToken(completionHandler: @escaping (AuthResponse) -> Void) throws {
-        // Get current directory
-        let currentDirectoryURL = URL(
-            fileURLWithPath: FileManager.default.currentDirectoryPath
-        )
-        // Get URL of credentials file
-        let credentialsURL = currentDirectoryURL.appendingPathComponent("credentials.json")
+    public func getAuthenticationToken(tokenPath: URL, completionHandler: @escaping (AuthResponse) -> Void) throws {
         guard let tokenProvider = ServiceAccountTokenProvider(
-            credentialsURL: credentialsURL,
+            credentialsURL: tokenPath,
             scopes:scopes
         ) else {
             fatalError("Failed to create token provider")
